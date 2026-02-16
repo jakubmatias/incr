@@ -34,7 +34,7 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: "1.85"
+          toolchain: stable
           targets: ${{ matrix.target }}
 
       - name: Install cross-compilation tools (aarch64 Linux)
