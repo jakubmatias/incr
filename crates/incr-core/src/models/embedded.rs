@@ -9,9 +9,6 @@ pub static MOBILE_DET: &[u8] = include_bytes!("../../../../models/mobile/det.onn
 /// Embedded mobile recognition model (~7.5MB)
 pub static MOBILE_REC: &[u8] = include_bytes!("../../../../models/mobile/latin_rec.onnx");
 
-/// Embedded mobile layout model (~7.1MB)
-pub static MOBILE_LAYOUT: &[u8] = include_bytes!("../../../../models/mobile/layout.onnx");
-
 /// Embedded mobile dictionary (~1.6KB)
 pub static MOBILE_DICT: &str = include_str!("../../../../models/mobile/latin_dict.txt");
 
@@ -25,7 +22,6 @@ pub fn has_embedded_models() -> bool {
 pub struct EmbeddedModels {
     pub detection: &'static [u8],
     pub recognition: &'static [u8],
-    pub layout: &'static [u8],
     pub dictionary: &'static str,
 }
 
@@ -35,7 +31,6 @@ impl EmbeddedModels {
         Self {
             detection: MOBILE_DET,
             recognition: MOBILE_REC,
-            layout: MOBILE_LAYOUT,
             dictionary: MOBILE_DICT,
         }
     }

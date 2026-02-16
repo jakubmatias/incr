@@ -139,13 +139,7 @@ fn get_variant_config(variant: ModelVariant) -> VariantConfig {
                 url: "https://github.com/jakubmatias/incr/raw/main/models/mobile/latin_dict.txt",
                 mirror_url: "https://github.com/jakubmatias/incr/raw/main/models/mobile/latin_dict.txt",
             },
-            layout: Some(ModelInfo {
-                filename: "layout.onnx",
-                size_bytes: 7_100_000,
-                description: "PP-Structure layout detection",
-                url: "https://github.com/jakubmatias/incr/raw/main/models/mobile/layout.onnx",
-                mirror_url: "https://github.com/jakubmatias/incr/raw/main/models/mobile/layout.onnx",
-            }),
+            layout: None,
             table: None,
         },
         ModelVariant::Server => VariantConfig {
@@ -170,13 +164,7 @@ fn get_variant_config(variant: ModelVariant) -> VariantConfig {
                 url: "https://github.com/jakubmatias/incr/raw/main/models/server/latin_dict.txt",
                 mirror_url: "https://github.com/jakubmatias/incr/raw/main/models/server/latin_dict.txt",
             },
-            layout: Some(ModelInfo {
-                filename: "layout.onnx",
-                size_bytes: 7_100_000,
-                description: "PP-Structure layout detection",
-                url: "https://github.com/jakubmatias/incr/raw/main/models/server/layout.onnx",
-                mirror_url: "https://github.com/jakubmatias/incr/raw/main/models/server/layout.onnx",
-            }),
+            layout: None,
             table: None,
         },
     }
