@@ -1,0 +1,37 @@
+[package]
+name = "incr-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Core library for Polish invoice OCR - PDF processing, OCR, and field extraction"
+
+[features]
+default = ["native"]
+native = ["incr-inference/native"]
+wasm = ["incr-inference/wasm"]
+
+[dependencies]
+incr-inference = { path = "../incr-inference" }
+
+# Core
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+chrono.workspace = true
+rust_decimal.workspace = true
+image.workspace = true
+ndarray.workspace = true
+tracing.workspace = true
+
+# PDF
+lopdf.workspace = true
+pdf-extract.workspace = true
+
+# Regex for field extraction
+regex = "1.11"
+lazy_static = "1.5"
+
+[dev-dependencies]
+pretty_assertions.workspace = true
+tokio = { workspace = true, features = ["rt", "macros"] }
