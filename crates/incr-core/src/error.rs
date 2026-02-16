@@ -18,6 +18,7 @@ pub enum IncrError {
     Extraction(#[from] ExtractionError),
 
     /// Inference error from the inference layer.
+    #[cfg(feature = "wasm")]
     #[error("inference error: {0}")]
     Inference(#[from] incr_inference::InferenceError),
 

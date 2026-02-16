@@ -47,6 +47,10 @@ pub struct ProcessArgs {
     /// Validate extracted data
     #[arg(long)]
     validate: bool,
+
+    /// Keep [UNK] tokens in OCR output instead of replacing with spaces
+    #[arg(long)]
+    keep_unk: bool,
 }
 
 #[derive(Clone, Copy, Debug, clap::ValueEnum)]
@@ -63,11 +67,15 @@ pub async fn run(args: ProcessArgs, config_path: Option<&str>) -> anyhow::Result
     let start = Instant::now();
 
     // Load configuration
-    let config = if let Some(path) = config_path {
+    let mut config = if let Some(path) = config_path {
         IncrConfig::from_file(std::path::Path::new(path))?
     } else {
         IncrConfig::default()
     };
+
+    if args.keep_unk {
+        config.ocr.keep_unk = true;
+    }
 
     // Check input file exists
     if !args.input.exists() {

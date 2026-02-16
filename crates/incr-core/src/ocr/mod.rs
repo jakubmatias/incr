@@ -1,23 +1,55 @@
 //! OCR pipeline using PaddleOCR models.
 
+#[cfg(feature = "wasm")]
 mod classifier;
+#[cfg(feature = "wasm")]
 mod detector;
+#[cfg(feature = "wasm")]
 mod engine;
+#[cfg(feature = "wasm")]
 mod layout;
+#[cfg(feature = "wasm")]
 mod preprocessing;
+#[cfg(feature = "wasm")]
 mod recognizer;
+#[cfg(feature = "wasm")]
 mod table;
 
+#[cfg(feature = "wasm")]
 pub use classifier::AngleClassifier;
+#[cfg(feature = "wasm")]
 pub use detector::TextDetector;
+#[cfg(feature = "wasm")]
 pub use engine::{OcrEngine, OcrEngineBuilder};
+#[cfg(feature = "wasm")]
 pub use layout::{LayoutDetector, LayoutModelType, LayoutRegion, LayoutResult, LayoutType};
+#[cfg(feature = "wasm")]
 pub use preprocessing::ImagePreprocessor;
+#[cfg(feature = "wasm")]
 pub use recognizer::TextRecognizer;
+#[cfg(feature = "wasm")]
 pub use table::{TableCell, TableClassifier, TableRecognizer, TableStructure, TableType};
 
 #[cfg(feature = "native")]
-pub use engine::{create_engine_from_dir, create_engine_from_embedded};
+mod pure_engine;
+
+#[cfg(feature = "native")]
+pub use pure_engine::PureOcrEngine;
+
+#[cfg(feature = "native")]
+pub fn create_engine_from_dir(
+    model_dir: &std::path::Path,
+    config: crate::models::config::OcrConfig,
+) -> Result<PureOcrEngine, crate::error::OcrError> {
+    PureOcrEngine::from_dir(model_dir, config)
+}
+
+#[cfg(feature = "native")]
+pub fn create_engine_from_embedded(
+    config: crate::models::config::OcrConfig,
+) -> Result<PureOcrEngine, crate::error::OcrError> {
+    PureOcrEngine::from_embedded(config)
+}
 
 use serde::{Deserialize, Serialize};
 

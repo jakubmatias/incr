@@ -61,6 +61,9 @@ pub struct OcrConfig {
 
     /// Number of CPU threads to use.
     pub num_threads: usize,
+
+    /// Keep [UNK] tokens in recognized text instead of replacing with spaces.
+    pub keep_unk: bool,
 }
 
 impl Default for OcrConfig {
@@ -75,6 +78,7 @@ impl Default for OcrConfig {
             recognition_batch_size: 8,
             use_gpu: false,
             num_threads: 4,
+            keep_unk: false,
         }
     }
 }

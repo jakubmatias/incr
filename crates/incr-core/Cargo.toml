@@ -8,11 +8,13 @@ description = "Core library for Polish invoice OCR - PDF processing, OCR, and fi
 
 [features]
 default = ["native"]
-native = ["incr-inference/native"]
-wasm = ["incr-inference/wasm"]
+native = ["dep:pure-onnx-ocr", "dep:tempfile"]
+wasm = ["dep:incr-inference", "incr-inference/wasm"]
 
 [dependencies]
-incr-inference = { path = "../incr-inference" }
+incr-inference = { path = "../incr-inference", optional = true }
+pure-onnx-ocr = { workspace = true, optional = true }
+tempfile = { workspace = true, optional = true }
 
 # Core
 serde.workspace = true

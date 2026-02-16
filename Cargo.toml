@@ -47,6 +47,10 @@ wasm-bindgen-futures = "0.4"
 # Testing
 pretty_assertions = "1.4"
 
+# Pure Rust OCR
+pure-onnx-ocr = "0.1"
+tempfile = "3"
+
 [profile.release]
 lto = true
 codegen-units = 1

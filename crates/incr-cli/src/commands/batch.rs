@@ -49,6 +49,10 @@ pub struct BatchArgs {
     /// Model directory
     #[arg(short, long)]
     model_dir: Option<PathBuf>,
+
+    /// Keep [UNK] tokens in OCR output instead of replacing with spaces
+    #[arg(long)]
+    keep_unk: bool,
 }
 
 /// Result of processing a single file.
@@ -63,11 +67,15 @@ pub async fn run(args: BatchArgs, config_path: Option<&str>) -> anyhow::Result<(
     let start = Instant::now();
 
     // Load configuration
-    let config = if let Some(path) = config_path {
+    let mut config = if let Some(path) = config_path {
         IncrConfig::from_file(std::path::Path::new(path))?
     } else {
         IncrConfig::default()
     };
+
+    if args.keep_unk {
+        config.ocr.keep_unk = true;
+    }
 
     // Expand glob pattern
     let files: Vec<PathBuf> = glob(&args.input)?
